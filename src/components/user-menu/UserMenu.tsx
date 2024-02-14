@@ -13,7 +13,7 @@ import Toast from 'components/toast'
 
 import DropdownIcon from 'assets/chevron-down.svg'
 import LogoutIcon from 'assets/logout.svg'
-import SettingsIcon from 'assets/settings.svg'
+import ProfileIcon from 'assets/profile.svg'
 import DashboardIcon from 'assets/dashboard-2.svg'
 
 import stl from './UserMenu.module.scss'
@@ -31,6 +31,16 @@ const UserMenu = ({ user, theme }: Props) => {
   const dispatch = useDispatch()
 
   const ref = useRef(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: any) => {
+      e.key === 'Escape' && setExpand(false)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   useEffect(() => {
     theme === 'dark' ? setClassName(stl.darkUserMenu) : setClassName('')
@@ -80,12 +90,12 @@ const UserMenu = ({ user, theme }: Props) => {
             <ToggleThemeBtn customClass={stl.toggleBtn} theme={theme} />
           </div>
           <Link
-            href="/settings"
+            href="/user-profile"
             className={stl.settings}
             onClick={() => setExpand(false)}
           >
-            <span>Settings</span>
-            <SettingsIcon />
+            <span>Profile</span>
+            <ProfileIcon />
           </Link>
           <Link
             href="/dashboard"

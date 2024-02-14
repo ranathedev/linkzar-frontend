@@ -10,14 +10,14 @@
     "build": "next build && next export",
     "start": "next start -p 3000",
     "lint": "next lint",
-    "deploy": "next build && next export && firebase deploy --only hosting"
+    "deploy": "next build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.7",
     "clsx": "^1.2.1",
-    "firebase": "^10.1.0",
+    "firebase": "^10.8.0",
     "formik": "^2.4.3",
     "next": "13.4.7",
     "react": "18.2.0",

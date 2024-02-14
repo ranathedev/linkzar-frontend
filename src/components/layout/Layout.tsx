@@ -4,7 +4,6 @@ import { User } from 'firebase/auth'
 
 import Header from 'components/header'
 import Footer from 'components/footer'
-import NoticeBanner from 'components/notice-banner'
 
 import stl from './Layout.module.scss'
 
@@ -29,6 +28,7 @@ const Layout = ({ theme, children, title, user }: Props) => {
     <>
       <Head>
         <title>{title}</title>
+        <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={description} />
         <meta name="author" content="Rana Intizar" />
@@ -98,7 +98,6 @@ const Layout = ({ theme, children, title, user }: Props) => {
       <Header theme={theme} user={user} />
       <main className={className}>{children}</main>
       <Footer theme={theme} />
-      <NoticeBanner />
     </>
   )
 }

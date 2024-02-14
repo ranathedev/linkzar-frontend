@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { User } from 'firebase/auth'
@@ -26,6 +26,16 @@ const AvatarContainer = ({
   customClass,
 }: Props) => {
   const [showModal, setShowModal] = React.useState(false)
+
+  useEffect(() => {
+    const handleKeyDown = (e: any) => {
+      e.key === 'Escape' && setShowModal(false)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   return (
     <>

@@ -48,7 +48,7 @@
   button {
     position: absolute;
     right: 0.625rem;
-    bottom: 0.625rem;
+    bottom: 0.6rem;
     padding: 0.5rem 1rem;
     color: #fff;
     background: #1d4ed8;
@@ -60,6 +60,11 @@
 
     &:hover {
       background: #1e40af;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
     }
   }
 }

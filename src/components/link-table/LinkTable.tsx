@@ -35,6 +35,16 @@ const LinkTable = ({ theme, domainUrl, user }: Props) => {
   const [allLinks, setAllLinks] = useState<LinkType[]>([])
 
   useEffect(() => {
+    const handleKeyDown = (e: any) => {
+      e.key === 'Escape' && setShowModal(false)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  useEffect(() => {
     theme === 'dark' ? setClassName(stl.darkLinkTable) : setClassName('')
   }, [theme])
 
@@ -118,7 +128,7 @@ const LinkTable = ({ theme, domainUrl, user }: Props) => {
   }
 
   const handleCancel = () => {
-    setListOfLinks(allLinks)
+    if (allLinks.length > 0) setListOfLinks(allLinks)
     setSearchMsg('')
     setAllLinks([])
   }

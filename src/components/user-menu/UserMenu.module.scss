@@ -104,7 +104,8 @@
 
   .menu {
     background: #374151;
-    box-shadow: #444 0px 7px 29px 0px;
+    box-shadow: none;
+    border: 1px solid #ccc;
 
     .theme,
     .logout,

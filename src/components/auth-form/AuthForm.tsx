@@ -39,7 +39,7 @@ const AuthForm = ({ theme }: Props) => {
   })
   const [className, setClassName] = useState('')
   const [formType, setFormType] = useState('signup')
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   const [resetPass, setResetPass] = useState(false)
   const [showToast, setShowToast] = useState(false)

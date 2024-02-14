@@ -66,6 +66,15 @@ const ActionBox = ({
   const [showShareMenu, setShowShareMenu] = useState(false)
 
   useEffect(() => {
+    const handleKeyDown = (e: any) =>
+      e.key === 'Escape' && setShowActionList(false)
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  useEffect(() => {
     theme === 'dark' ? setClassName(stl.darkActionBox) : setClassName('')
   }, [theme])
 

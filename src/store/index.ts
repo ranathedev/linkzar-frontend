@@ -13,8 +13,13 @@ import {
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
 
+const prefersDarkMode =
+  typeof window !== 'undefined' &&
+  window.matchMedia &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches
+
 const initialState = {
-  theme: 'light',
+  theme: prefersDarkMode ? 'light' : 'dark',
 }
 
 const persistConfig = {

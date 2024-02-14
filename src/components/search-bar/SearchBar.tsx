@@ -26,7 +26,10 @@ const SearchBar = ({ theme, handleSubmit, handleCancel }: Props) => {
     isMac() ? setDevice('Mac') : setDevice('')
   }, [])
 
-  const handleKeydown = (e: any) => e.key === 'Enter' && handleSubmit(value)
+  const handleKeydown = (e: any) => {
+    e.key === 'Enter' && handleSubmit(value)
+    e.key === 'Escape' && handleCancel()
+  }
 
   const handleInput = (e: any) => {
     const value = e.target.value
@@ -50,7 +53,13 @@ const SearchBar = ({ theme, handleSubmit, handleCancel }: Props) => {
         onChange={e => setValue(e.target.value)}
         onInput={handleInput}
       />
-      <button onClick={() => handleSubmit(value)}>Search</button>
+      <button
+        title={value === '' ? 'Search box is empty' : 'search'}
+        disabled={value === ''}
+        onClick={() => handleSubmit(value)}
+      >
+        Search
+      </button>
     </div>
   )
 }

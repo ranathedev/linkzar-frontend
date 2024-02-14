@@ -29,7 +29,7 @@
   margin-top: 7rem;
 }
 
-.settings {
+.profile {
   @extend .flexCenter;
   width: 100vw;
   min-height: 100vh;
@@ -49,12 +49,8 @@
   background: #030712;
 }
 
-.darkSettings .wrapper {
-  box-shadow: none;
-}
-
 @media screen and (max-width: 1024px) {
-  .settings .container {
+  .profile .container {
     gap: 1rem;
   }
 }
@@ -75,13 +71,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .settings .container {
-    .wrapper {
-      height: 100%;
-    }
-
-    .avatarHandler {
-      display: none;
-    }
+  .profile .container .avatarHandler {
+    display: none;
   }
 }

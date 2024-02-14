@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import clsx from 'clsx'
 
+import { User } from 'firebase/auth'
 import { inputFocus } from 'lib/utils'
 import WelcomeBanner from 'components/welcome-banner'
 import LinkTable from 'components/link-table'
 
 import stl from './Dashboard.module.scss'
-import { User } from 'firebase/auth'
 
 interface Props {
   theme: string

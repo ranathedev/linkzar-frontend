@@ -30,6 +30,16 @@ const AvatarHandler = ({ theme, user, customClass }: Props) => {
   const [toastOpts, setToastOpts] = useState({ variant: '', msg: '' })
 
   useEffect(() => {
+    const handleKeyDown = (e: any) => {
+      e.key === 'Escape' && setShowModal(false)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  useEffect(() => {
     theme === 'dark' ? setClassName(stl.darkAvatarHandler) : setClassName('')
   }, [theme])
 

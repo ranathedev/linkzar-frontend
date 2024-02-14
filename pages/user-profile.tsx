@@ -11,7 +11,7 @@ import VerificationDialog from 'components/verification-dialog'
 
 import stl from './index.module.scss'
 
-const SettingsPage = ({ user, isLoading, theme }: PageProps) => {
+const Profile = ({ user, isLoading, theme }: PageProps) => {
   const [className, setClassName] = useState('')
   const router = useRouter()
 
@@ -22,14 +22,14 @@ const SettingsPage = ({ user, isLoading, theme }: PageProps) => {
   if (!isLoading && mode !== 'dev' && !user) router.push('/auth?type=signin')
 
   useEffect(() => {
-    theme === 'dark' ? setClassName(stl.darkSettings) : setClassName('')
+    theme === 'dark' ? setClassName(stl.darkProfile) : setClassName('')
   }, [theme])
 
   return isLoading ? (
     <LoadingScreen />
   ) : user && user.emailVerified ? (
-    <Layout theme={theme} user={user} title="Settings | Linkzar">
-      <div className={clsx(stl.settings, className)}>
+    <Layout theme={theme} user={user} title="Profile | Linkzar">
+      <div className={clsx(stl.profile, className)}>
         <div className={stl.container}>
           <AvatarHandler
             theme={theme}
@@ -49,4 +49,4 @@ const SettingsPage = ({ user, isLoading, theme }: PageProps) => {
   )
 }
 
-export default SettingsPage
+export default Profile

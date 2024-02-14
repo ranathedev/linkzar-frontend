@@ -122,6 +122,7 @@ const URLShortener = ({
             variant: 'warn',
             msg: '3 Links Created! Sign Up to Create More.',
           })
+          handleReset()
         }
       } else handleSubmit()
     }
@@ -151,17 +152,18 @@ const URLShortener = ({
       if (isValidURL) {
         if (alias === '' || alias.length >= 5) {
           const shortId = alias === '' ? generateRandomString(7) : alias
+
           const response = await createShortLink(setLoading, shortId, url, uid)
 
-          setShowToast(true)
           if (response.err) {
+            setShowToast(true)
             setToastOpts({
               variant: 'warn',
               msg: response.err,
             })
           } else if (response.count) {
             setLinkData(response.document)
-            if (uid === 'links' && linksCount < 3) {
+            if (uid === 'links') {
               const updatedLinkCount = linksCount + response.count
               setLinksCount(updatedLinkCount)
               const stringData = JSON.stringify(updatedLinkCount)
@@ -178,22 +180,13 @@ const URLShortener = ({
                 const stringData = JSON.stringify(demoLinks)
                 localStorage.setItem('demoLinks', stringData)
               }
-            }
+            } else sendNewLink(response.document)
 
+            setShowToast(true)
             setToastOpts({
               variant: 'success',
               msg: 'Link created successfully!',
             })
-
-            sendNewLink(response.document)
-          } else {
-            setLinkData(response)
-            setToastOpts({
-              variant: 'success',
-              msg: 'Link created successfully!',
-            })
-
-            sendNewLink(response)
           }
         } else setAliasErr('Alias cannot be less than 5 chars.')
       } else setUrlErr('Url is not valid.')
@@ -206,6 +199,26 @@ const URLShortener = ({
       setToastOpts({ variant: 'success', msg: 'Link deleted successfully!' })
       handleReset()
       sendDeleteId(linkData._id)
+      if (uid === 'links') {
+        const data = localStorage.getItem('linksCount')
+        if (data) {
+          //@ts-ignore
+          const linksCount = JSON.parse(data)
+          const stringData = JSON.stringify(linksCount - 1)
+          localStorage.setItem('linksCount', stringData)
+          setLinksCount(linksCount - 1)
+        }
+
+        const demoLinksData = localStorage.getItem('demoLinks')
+        if (demoLinksData) {
+          const existingData = JSON.parse(demoLinksData)
+          const updatedData = existingData.filter(
+            (item: LinkType) => item._id !== linkData._id
+          )
+          const stringData = JSON.stringify(updatedData)
+          localStorage.setItem('demoLinks', stringData)
+        }
+      }
     } else {
       setShowToast(true)
       setToastOpts({ variant: 'danger', msg: res.err })
@@ -298,7 +311,7 @@ const URLShortener = ({
                   <Button
                     label="Shorten URL"
                     theme={theme}
-                    handleOnClick={handleSubmit}
+                    handleOnClick={() => handleKeyDown({ key: 'Enter' })}
                   />
                 </div>
               </div>

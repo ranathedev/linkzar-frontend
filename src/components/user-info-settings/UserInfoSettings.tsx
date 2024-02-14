@@ -39,6 +39,16 @@ const UserInfoSettings = ({ theme, user }: Props) => {
   })
 
   useEffect(() => {
+    const handleKeyDown = (e: any) => {
+      e.key === 'Escape' && setShowDialog(false)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  useEffect(() => {
     theme === 'dark' ? setClassName(stl.darkUserInforSet) : setClassName('')
   }, [theme])
 
@@ -172,6 +182,7 @@ const UserInfoSettings = ({ theme, user }: Props) => {
                 <label htmlFor="email">Your email</label>
                 <input
                   type="email"
+                  autoComplete="off"
                   name="email"
                   placeholder={user?.email || 'johndoe@gmail.com'}
                   onChange={e => setEmail(e.target.value)}
@@ -198,6 +209,7 @@ const UserInfoSettings = ({ theme, user }: Props) => {
                 <label htmlFor="newPass">New Password</label>
                 <input
                   type="password"
+                  autoComplete="off"
                   name="newPass"
                   placeholder="Enter your new password"
                   onChange={e => setNewPass(e.target.value)}
